@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{259CB1E0-F854-4D5A-B2BA-ECA0745FC2F2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{5969BEE3-514D-4677-B797-229DFB74B790}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartTestTask.Domain", "src\SmartTestTask.Domain\SmartTestTask.Domain.csproj", "{06752212-0660-44A6-BB29-65BC71148938}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartTestTask.Application", "src\SmartTestTask.Application\SmartTestTask.Application.csproj", "{821A10D5-0CA5-4DBC-8827-0ACEF4D47B97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartTestTask.Infrastructure", "SmartTestTask.Infrastructure\SmartTestTask.Infrastructure.csproj", "{6F7887C8-C075-4757-B885-A19ED2290F62}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B6A172B9-B925-41F6-B531-1E605DA4B769}"
+	ProjectSection(SolutionItems) = preProject
+		compose.yaml = compose.yaml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartTestTask.API", "SmartTestTask.API\SmartTestTask.API.csproj", "{D6B942BD-77EF-4C7C-A059-C3692945B8A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartTestTask.Tests", "SmartTestTask.Tests\SmartTestTask.Tests.csproj", "{1B65D630-A751-4EE5-AD91-8DC8A7CBC1C1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{06752212-0660-44A6-BB29-65BC71148938} = {259CB1E0-F854-4D5A-B2BA-ECA0745FC2F2}
+		{821A10D5-0CA5-4DBC-8827-0ACEF4D47B97} = {259CB1E0-F854-4D5A-B2BA-ECA0745FC2F2}
+		{6F7887C8-C075-4757-B885-A19ED2290F62} = {259CB1E0-F854-4D5A-B2BA-ECA0745FC2F2}
+		{D6B942BD-77EF-4C7C-A059-C3692945B8A0} = {259CB1E0-F854-4D5A-B2BA-ECA0745FC2F2}
+		{1B65D630-A751-4EE5-AD91-8DC8A7CBC1C1} = {5969BEE3-514D-4677-B797-229DFB74B790}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{06752212-0660-44A6-BB29-65BC71148938}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06752212-0660-44A6-BB29-65BC71148938}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06752212-0660-44A6-BB29-65BC71148938}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06752212-0660-44A6-BB29-65BC71148938}.Release|Any CPU.Build.0 = Release|Any CPU
+		{821A10D5-0CA5-4DBC-8827-0ACEF4D47B97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{821A10D5-0CA5-4DBC-8827-0ACEF4D47B97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{821A10D5-0CA5-4DBC-8827-0ACEF4D47B97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{821A10D5-0CA5-4DBC-8827-0ACEF4D47B97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F7887C8-C075-4757-B885-A19ED2290F62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F7887C8-C075-4757-B885-A19ED2290F62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F7887C8-C075-4757-B885-A19ED2290F62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F7887C8-C075-4757-B885-A19ED2290F62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6B942BD-77EF-4C7C-A059-C3692945B8A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6B942BD-77EF-4C7C-A059-C3692945B8A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6B942BD-77EF-4C7C-A059-C3692945B8A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6B942BD-77EF-4C7C-A059-C3692945B8A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B65D630-A751-4EE5-AD91-8DC8A7CBC1C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B65D630-A751-4EE5-AD91-8DC8A7CBC1C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B65D630-A751-4EE5-AD91-8DC8A7CBC1C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B65D630-A751-4EE5-AD91-8DC8A7CBC1C1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
