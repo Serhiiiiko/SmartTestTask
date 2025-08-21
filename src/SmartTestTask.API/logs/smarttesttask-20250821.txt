@@ -1,0 +1,28 @@
+2025-08-21 11:09:13.265 +03:00 [INF] Starting SmartTestTask API
+2025-08-21 11:09:13.978 +03:00 [INF] User profile is available. Using 'C:\Users\legog\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-08-21 11:09:14.186 +03:00 [INF] Contract Processing Background Service is starting
+2025-08-21 11:09:14.187 +03:00 [INF] In-memory message bus started listening
+2025-08-21 11:09:15.431 +03:00 [INF] Executed DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-08-21 11:09:15.462 +03:00 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2025-08-21 11:09:15.470 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-08-21 11:09:15.476 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2025-08-21 11:09:15.493 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2025-08-21 11:09:15.507 +03:00 [INF] No migrations were applied. The database is already up to date.
+2025-08-21 11:09:15.508 +03:00 [INF] Database migration completed successfully
+2025-08-21 11:09:15.558 +03:00 [INF] Now listening on: http://localhost:5120
+2025-08-21 11:09:15.560 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-08-21 11:09:15.562 +03:00 [INF] Hosting environment: Development
+2025-08-21 11:09:15.563 +03:00 [INF] Content root path: D:\JetBrainsRiderRepos2\SmartTestTask\SmartTestTask\src\SmartTestTask.API
+2025-08-21 11:09:32.709 +03:00 [INF] Application is shutting down...
+2025-08-21 11:09:32.721 +03:00 [INF] Contract Processing Background Service is stopping
+2025-08-21 11:09:32.725 +03:00 [INF] In-memory message bus stopped listening
+2025-08-21 11:09:32.728 +03:00 [ERR] Error in background service
+System.Threading.Tasks.TaskCanceledException: A task was canceled.
+   at SmartTestTask.Infrastructure.Services.ContractProcessingBackgroundService.ExecuteAsync(CancellationToken stoppingToken) in D:\JetBrainsRiderRepos2\SmartTestTask\SmartTestTask\src\SmartTestTask.Infrastructure\Services\ContractProcessingBackgroundService.cs:line 40
