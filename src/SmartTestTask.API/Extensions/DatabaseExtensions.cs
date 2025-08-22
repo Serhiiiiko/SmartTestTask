@@ -31,11 +31,6 @@ public static class DatabaseExtensions
         });
 
         // Health checks
-        services.AddHealthChecks()
-            .AddDbContextCheck<ApplicationDbContext>(
-                name: "database",
-                failureStatus: Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus.Unhealthy,
-                tags: new[] { "ready" });
 
         return services;
     }

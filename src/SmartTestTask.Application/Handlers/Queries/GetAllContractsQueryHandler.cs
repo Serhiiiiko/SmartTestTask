@@ -3,11 +3,13 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using SmartTestTask.Application.DTOs.Responce;
 using SmartTestTask.Application.Queries;
+using SmartTestTask.Domain.Errors;
 using SmartTestTask.Domain.Interfaces;
+using SmartTestTask.Domain.Results;
 
 namespace SmartTestTask.Application.Handlers.Queries;
 
-public class GetAllContractsQueryHandler : IRequestHandler<GetAllContractsQuery, ApiResponse<IEnumerable<ContractListDto>>>
+public class GetAllContractsQueryHandler : IRequestHandler<GetAllContractsQuery, Result<IEnumerable<ContractListDto>>>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
@@ -23,7 +25,7 @@ public class GetAllContractsQueryHandler : IRequestHandler<GetAllContractsQuery,
         _logger = logger;
     }
 
-    public async Task<ApiResponse<IEnumerable<ContractListDto>>> Handle(
+    public async Task<Result<IEnumerable<ContractListDto>>> Handle(
         GetAllContractsQuery request, 
         CancellationToken cancellationToken)
     {
@@ -36,13 +38,12 @@ public class GetAllContractsQueryHandler : IRequestHandler<GetAllContractsQuery,
             
             _logger.LogInformation("Retrieved {Count} contracts", contracts.Count());
             
-            return ApiResponse<IEnumerable<ContractListDto>>.SuccessResponse(contractDtos);
+            return Result.Success(contractDtos);
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error retrieving contracts");
-            return ApiResponse<IEnumerable<ContractListDto>>.FailureResponse(
-                "An error occurred while retrieving contracts");
+            return DomainErrors.General.UnexpectedError;
         }
     }
 }

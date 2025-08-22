@@ -55,6 +55,11 @@ public class Result
 
     public static Result<T> Success<T>(T value) => Result<T>.Success(value);
     public static Result<T> Failure<T>(Error error) => Result<T>.Failure(error);
+    
+    public TResult Match<TResult>(
+        Func<TResult> onSuccess,
+        Func<Error, TResult> onFailure) =>
+        IsSuccess ? onSuccess() : onFailure(Error);
 }
 
 public record Error(string Code, string Message)

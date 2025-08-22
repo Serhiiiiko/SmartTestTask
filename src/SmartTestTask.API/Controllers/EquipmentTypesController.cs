@@ -6,10 +6,10 @@ using SmartTestTask.Application.Queries;
 
 namespace SmartTestTask.API.Controllers;
 
-
 [ApiController]
 [Route("api/[controller]")]
 [Authorize]
+[Produces("application/json")]
 public class EquipmentTypesController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -26,21 +26,19 @@ public class EquipmentTypesController : ControllerBase
     /// </summary>
     /// <returns>List of equipment types</returns>
     [HttpGet]
-    [ProducesResponseType(typeof(ApiResponse<IEnumerable<ProcessEquipmentTypeDto>>), StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(typeof(IEnumerable<ProcessEquipmentTypeDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> GetAllEquipmentTypes()
     {
-        try
-        {
-            var query = new GetAllEquipmentTypesQuery();
-            var result = await _mediator.Send(query);
-            
-            return Ok(result);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error retrieving equipment types");
-            return StatusCode(500, ApiResponse<IEnumerable<ProcessEquipmentTypeDto>>.FailureResponse("An error occurred while retrieving equipment types"));
-        }
+        var query = new GetAllEquipmentTypesQuery();
+        var result = await _mediator.Send(query);
+        
+        return result.Match<IActionResult>(
+            onSuccess: equipmentTypes => Ok(equipmentTypes),
+            onFailure: error => Problem(
+                detail: error.Message,
+                statusCode: StatusCodes.Status500InternalServerError,
+                title: "Failed to retrieve equipment types"));
     }
 }

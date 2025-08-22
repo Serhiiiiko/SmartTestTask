@@ -26,6 +26,7 @@ try
     builder.Services.AddApiKeyAuthentication();
     builder.Services.AddSwaggerDocumentation();
     builder.Services.AddCorsPolicy();
+    builder.Services.AddHealthChecksConfiguration();
     
     // Build the application
     var app = builder.Build();
@@ -57,15 +58,7 @@ try
     app.MapControllers();
     
     // Health checks
-    app.MapHealthChecks("/health/live", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
-    {
-        Predicate = _ => false // Liveness check - no dependencies
-    });
-    
-    app.MapHealthChecks("/health/ready", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
-    {
-        Predicate = check => check.Tags.Contains("ready") // Readiness check - include database
-    });
+    app.UseHealthChecksConfiguration();
     
     await app.RunAsync();
 }

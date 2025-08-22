@@ -9,6 +9,7 @@ namespace SmartTestTask.API.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 [Authorize]
+[Produces("application/json")]
 public class FacilitiesController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -25,21 +26,19 @@ public class FacilitiesController : ControllerBase
     /// </summary>
     /// <returns>List of facilities with area information</returns>
     [HttpGet]
-    [ProducesResponseType(typeof(ApiResponse<IEnumerable<ProductionFacilityDto>>), StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(typeof(IEnumerable<ProductionFacilityDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> GetAllFacilities()
     {
-        try
-        {
-            var query = new GetAllFacilitiesQuery();
-            var result = await _mediator.Send(query);
-            
-            return Ok(result);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error retrieving facilities");
-            return StatusCode(500, ApiResponse<IEnumerable<ProductionFacilityDto>>.FailureResponse("An error occurred while retrieving facilities"));
-        }
+        var query = new GetAllFacilitiesQuery();
+        var result = await _mediator.Send(query);
+        
+        return result.Match<IActionResult>(
+            onSuccess: facilities => Ok(facilities),
+            onFailure: error => Problem(
+                detail: error.Message,
+                statusCode: StatusCodes.Status500InternalServerError,
+                title: "Failed to retrieve facilities"));
     }
 }

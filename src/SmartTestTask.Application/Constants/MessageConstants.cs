@@ -1,136 +1,133 @@
-﻿using SmartTestTask.Application.Resources;
-
-namespace SmartTestTask.Application.Constants;
+﻿namespace SmartTestTask.Application.Constants;
 
 public static class MessageConstants
 {
-    // Contract Messages
     public static class Contract
     {
         // Error Messages
-        public static string NotFound(Guid id) => string.Format(ErrorMessages.Contract_NotFound, id);
-        public static string InvalidQuantity => ErrorMessages.Contract_InvalidQuantity;
-        public static string AlreadyDeactivated => ErrorMessages.Contract_AlreadyDeactivated;
-        public static string CreationFailed => ErrorMessages.Contract_CreationFailed;
-        public static string UpdateFailed => ErrorMessages.Contract_UpdateFailed;
-        public static string DeactivationFailed => ErrorMessages.Contract_DeactivationFailed;
-        public static string IdMismatch => ErrorMessages.Contract_IdMismatch;
+        public static string NotFound(Guid id) => $"Contract with ID '{id}' was not found";
+        public static string InvalidQuantity => "Equipment quantity must be greater than zero";
+        public static string AlreadyDeactivated => "Contract is already deactivated";
+        public static string CreationFailed => "Failed to create contract";
+        public static string UpdateFailed => "Failed to update contract";
+        public static string DeactivationFailed => "Failed to deactivate contract";
+        public static string IdMismatch => "Contract ID mismatch";
         
         // Success Messages
-        public static string CreatedSuccessfully => SuccessMessages.Contract_CreatedSuccessfully;
-        public static string UpdatedSuccessfully => SuccessMessages.Contract_UpdatedSuccessfully;
-        public static string DeactivatedSuccessfully => SuccessMessages.Contract_DeactivatedSuccessfully;
-        public static string RetrievedSuccessfully => SuccessMessages.Contract_RetrievedSuccessfully;
-        public static string ListRetrievedSuccessfully => SuccessMessages.Contracts_RetrievedSuccessfully;
+        public static string CreatedSuccessfully => "Contract created successfully";
+        public static string UpdatedSuccessfully => "Contract updated successfully";
+        public static string DeactivatedSuccessfully => "Contract deactivated successfully";
+        public static string RetrievedSuccessfully => "Contract retrieved successfully";
+        public static string ListRetrievedSuccessfully => "Contracts retrieved successfully";
         
         // Validation Messages
-        public static string FacilityCodeRequired => ValidationMessages.Contract_FacilityCodeRequired;
-        public static string FacilityCodeMaxLength => ValidationMessages.Contract_FacilityCodeMaxLength;
-        public static string FacilityCodeFormat => ValidationMessages.Contract_FacilityCodeFormat;
-        public static string EquipmentCodeRequired => ValidationMessages.Contract_EquipmentCodeRequired;
-        public static string EquipmentCodeMaxLength => ValidationMessages.Contract_EquipmentCodeMaxLength;
-        public static string EquipmentCodeFormat => ValidationMessages.Contract_EquipmentCodeFormat;
-        public static string QuantityRequired => ValidationMessages.Contract_QuantityRequired;
-        public static string QuantityMustBePositive => ValidationMessages.Contract_QuantityMustBePositive;
-        public static string QuantityMaximum => ValidationMessages.Contract_QuantityMaximum;
-        public static string IdRequired => ValidationMessages.Contract_IdRequired;
+        public static string FacilityCodeRequired => "Production facility code is required";
+        public static string FacilityCodeMaxLength => "Production facility code must not exceed 50 characters";
+        public static string FacilityCodeFormat => "Production facility code must contain only uppercase letters, numbers, and hyphens";
+        public static string EquipmentCodeRequired => "Process equipment type code is required";
+        public static string EquipmentCodeMaxLength => "Process equipment type code must not exceed 50 characters";
+        public static string EquipmentCodeFormat => "Process equipment type code must contain only uppercase letters, numbers, and hyphens";
+        public static string QuantityRequired => "Equipment quantity is required";
+        public static string QuantityMustBePositive => "Equipment quantity must be greater than zero";
+        public static string QuantityMaximum => "Equipment quantity must not exceed 1000";
+        public static string IdRequired => "Contract ID is required";
     }
     
     public static class Facility
     {
         // Error Messages
-        public static string NotFound(string code) => string.Format(ErrorMessages.Facility_NotFound, code);
+        public static string NotFound(string code) => $"Production facility with code '{code}' was not found";
         public static string InsufficientArea(string code, decimal required, decimal available) =>
-            string.Format(ErrorMessages.Facility_InsufficientArea, code, required, available);
-        public static string InvalidCode => ErrorMessages.Facility_InvalidCode;
-        public static string InvalidName => ErrorMessages.Facility_InvalidName;
-        public static string InvalidArea => ErrorMessages.Facility_InvalidArea;
+            $"Insufficient area in facility {code}. Required: {required} m², Available: {available} m²";
+        public static string InvalidCode => "Production facility code cannot be empty";
+        public static string InvalidName => "Production facility name cannot be empty";
+        public static string InvalidArea => "Standard area must be greater than zero";
         
         // Success Messages
-        public static string CreatedSuccessfully => SuccessMessages.Facility_CreatedSuccessfully;
-        public static string UpdatedSuccessfully => SuccessMessages.Facility_UpdatedSuccessfully;
-        public static string DeletedSuccessfully => SuccessMessages.Facility_DeletedSuccessfully;
-        public static string ListRetrievedSuccessfully => SuccessMessages.Facilities_RetrievedSuccessfully;
+        public static string CreatedSuccessfully => "Facility created successfully";
+        public static string UpdatedSuccessfully => "Facility updated successfully";
+        public static string DeletedSuccessfully => "Facility deleted successfully";
+        public static string ListRetrievedSuccessfully => "Facilities retrieved successfully";
         
         // Validation Messages
-        public static string CodeRequired => ValidationMessages.Facility_CodeRequired;
-        public static string NameRequired => ValidationMessages.Facility_NameRequired;
-        public static string AreaMustBePositive => ValidationMessages.Facility_AreaMustBePositive;
+        public static string CodeRequired => "Facility code is required";
+        public static string NameRequired => "Facility name is required";
+        public static string AreaMustBePositive => "Facility area must be greater than zero";
     }
     
     public static class Equipment
     {
         // Error Messages
-        public static string NotFound(string code) => string.Format(ErrorMessages.Equipment_NotFound, code);
-        public static string InvalidCode => ErrorMessages.Equipment_InvalidCode;
-        public static string InvalidName => ErrorMessages.Equipment_InvalidName;
-        public static string InvalidArea => ErrorMessages.Equipment_InvalidArea;
+        public static string NotFound(string code) => $"Process equipment type with code '{code}' was not found";
+        public static string InvalidCode => "Equipment type code cannot be empty";
+        public static string InvalidName => "Equipment type name cannot be empty";
+        public static string InvalidArea => "Area must be greater than zero";
         
         // Success Messages
-        public static string CreatedSuccessfully => SuccessMessages.Equipment_CreatedSuccessfully;
-        public static string UpdatedSuccessfully => SuccessMessages.Equipment_UpdatedSuccessfully;
-        public static string DeletedSuccessfully => SuccessMessages.Equipment_DeletedSuccessfully;
-        public static string ListRetrievedSuccessfully => SuccessMessages.EquipmentTypes_RetrievedSuccessfully;
+        public static string CreatedSuccessfully => "Equipment type created successfully";
+        public static string UpdatedSuccessfully => "Equipment type updated successfully";
+        public static string DeletedSuccessfully => "Equipment type deleted successfully";
+        public static string ListRetrievedSuccessfully => "Equipment types retrieved successfully";
         
         // Validation Messages
-        public static string CodeRequired => ValidationMessages.Equipment_CodeRequired;
-        public static string NameRequired => ValidationMessages.Equipment_NameRequired;
-        public static string AreaMustBePositive => ValidationMessages.Equipment_AreaMustBePositive;
+        public static string CodeRequired => "Equipment type code is required";
+        public static string NameRequired => "Equipment type name is required";
+        public static string AreaMustBePositive => "Equipment area must be greater than zero";
     }
     
     public static class Validation
     {
-        public static string InvalidInput(string field) => string.Format(ErrorMessages.Validation_InvalidInput, field);
-        public static string RequiredField(string field) => string.Format(ErrorMessages.Validation_RequiredField, field);
+        public static string InvalidInput(string field) => $"Invalid input for field: {field}";
+        public static string RequiredField(string field) => $"Field '{field}' is required";
         public static string MaxLength(string field, int maxLength) => 
-            string.Format(ErrorMessages.Validation_MaxLength, field, maxLength);
+            $"Field '{field}' must not exceed {maxLength} characters";
         public static string InvalidFormat(string field, string format) => 
-            string.Format(ErrorMessages.Validation_InvalidFormat, field, format);
-        public static string Failed => ErrorMessages.Validation_Failed;
+            $"Field '{field}' must match format: {format}";
+        public static string Failed => "Validation failed";
         
-        public static string FieldRequired(string field) => string.Format(ValidationMessages.Field_Required, field);
+        public static string FieldRequired(string field) => $"{field} is required";
         public static string FieldMaxLength(string field, int maxLength) => 
-            string.Format(ValidationMessages.Field_MaxLength, field, maxLength);
+            $"{field} must not exceed {maxLength} characters";
         public static string FieldMinLength(string field, int minLength) => 
-            string.Format(ValidationMessages.Field_MinLength, field, minLength);
+            $"{field} must be at least {minLength} characters";
         public static string FieldInvalidFormat(string field) => 
-            string.Format(ValidationMessages.Field_InvalidFormat, field);
+            $"{field} has invalid format";
         public static string FieldMustBePositive(string field) => 
-            string.Format(ValidationMessages.Field_MustBePositive, field);
+            $"{field} must be greater than zero";
         public static string FieldMustBeInRange(string field, object min, object max) => 
-            string.Format(ValidationMessages.Field_MustBeInRange, field, min, max);
+            $"{field} must be between {min} and {max}";
     }
     
     public static class General
     {
         // Error Messages
-        public static string UnexpectedError => ErrorMessages.General_UnexpectedError;
-        public static string DatabaseError => ErrorMessages.General_DatabaseError;
-        public static string ConcurrencyConflict => ErrorMessages.General_ConcurrencyConflict;
-        public static string NotFound => ErrorMessages.General_NotFound;
-        public static string Unauthorized => ErrorMessages.General_Unauthorized;
-        public static string Forbidden => ErrorMessages.General_Forbidden;
+        public static string UnexpectedError => "An unexpected error occurred";
+        public static string DatabaseError => "A database error occurred";
+        public static string ConcurrencyConflict => "The record was modified by another user";
+        public static string NotFound => "Resource not found";
+        public static string Unauthorized => "Unauthorized access";
+        public static string Forbidden => "Access forbidden";
         
         // Success Messages
-        public static string OperationSuccessful => SuccessMessages.General_OperationSuccessful;
-        public static string DataSaved => SuccessMessages.General_DataSaved;
-        public static string ChangesApplied => SuccessMessages.General_ChangesApplied;
+        public static string OperationSuccessful => "Operation completed successfully";
+        public static string DataSaved => "Data saved successfully";
+        public static string ChangesApplied => "Changes applied successfully";
     }
     
     public static class Api
     {
-        public static string InvalidApiKey => ErrorMessages.Api_InvalidApiKey;
-        public static string ApiKeyNotProvided => ErrorMessages.Api_ApiKeyNotProvided;
-        public static string ApiKeyNotConfigured => ErrorMessages.Api_ApiKeyNotConfigured;
+        public static string InvalidApiKey => "Invalid API Key";
+        public static string ApiKeyNotProvided => "API Key was not provided";
+        public static string ApiKeyNotConfigured => "API Key is not configured";
     }
     
     public static class Processing
     {
         public static string ContractCreatedEventProcessed(Guid contractId) => 
-            string.Format(SuccessMessages.Processing_ContractCreatedEventProcessed, contractId);
+            $"Contract created event processed successfully for Contract ID: {contractId}";
         public static string ContractUpdatedEventProcessed(Guid contractId) => 
-            string.Format(SuccessMessages.Processing_ContractUpdatedEventProcessed, contractId);
+            $"Contract updated event processed successfully for Contract ID: {contractId}";
         public static string ContractDeactivatedEventProcessed(Guid contractId) => 
-            string.Format(SuccessMessages.Processing_ContractDeactivatedEventProcessed, contractId);
+            $"Contract deactivated event processed successfully for Contract ID: {contractId}";
     }
 }

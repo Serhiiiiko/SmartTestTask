@@ -3,11 +3,13 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using SmartTestTask.Application.DTOs.Responce;
 using SmartTestTask.Application.Queries;
+using SmartTestTask.Domain.Errors;
 using SmartTestTask.Domain.Interfaces;
+using SmartTestTask.Domain.Results;
 
 namespace SmartTestTask.Application.Handlers.Queries;
 
-public class GetAllEquipmentTypesQueryHandler : IRequestHandler<GetAllEquipmentTypesQuery, ApiResponse<IEnumerable<ProcessEquipmentTypeDto>>>
+public class GetAllEquipmentTypesQueryHandler : IRequestHandler<GetAllEquipmentTypesQuery, Result<IEnumerable<ProcessEquipmentTypeDto>>>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
@@ -23,7 +25,7 @@ public class GetAllEquipmentTypesQueryHandler : IRequestHandler<GetAllEquipmentT
         _logger = logger;
     }
 
-    public async Task<ApiResponse<IEnumerable<ProcessEquipmentTypeDto>>> Handle(
+    public async Task<Result<IEnumerable<ProcessEquipmentTypeDto>>> Handle(
         GetAllEquipmentTypesQuery request, 
         CancellationToken cancellationToken)
     {
@@ -36,13 +38,12 @@ public class GetAllEquipmentTypesQueryHandler : IRequestHandler<GetAllEquipmentT
             
             _logger.LogInformation("Retrieved {Count} equipment types", equipmentTypes.Count());
             
-            return ApiResponse<IEnumerable<ProcessEquipmentTypeDto>>.SuccessResponse(equipmentTypeDtos);
+            return Result.Success(equipmentTypeDtos);
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error retrieving equipment types");
-            return ApiResponse<IEnumerable<ProcessEquipmentTypeDto>>.FailureResponse(
-                "An error occurred while retrieving equipment types");
+            return DomainErrors.General.UnexpectedError;
         }
     }
 }

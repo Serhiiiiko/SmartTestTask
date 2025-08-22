@@ -7,8 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\src\SmartTestTask.Application\SmartTestTask.Application.csproj" />
-      <ProjectReference Include="..\src\SmartTestTask.Domain\SmartTestTask.Domain.csproj" />
+      <ProjectReference Include="..\SmartTestTask.Application\SmartTestTask.Application.csproj" />
+      <ProjectReference Include="..\SmartTestTask.Domain\SmartTestTask.Domain.csproj" />
       <ProjectReference Include="..\SmartTestTask.Domain\SmartTestTask.Domain.csproj" />
       <ProjectReference Include="..\SmartTestTask.Application\SmartTestTask.Application.csproj" />
     </ItemGroup>

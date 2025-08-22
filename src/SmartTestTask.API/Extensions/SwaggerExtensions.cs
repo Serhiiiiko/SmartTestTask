@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace SmartTestTask.API.Extensions;
 
@@ -63,10 +64,10 @@ public static class SwaggerExtensions
 
             // Custom schema IDs to avoid conflicts
             options.CustomSchemaIds(type => type.FullName?.Replace("+", "."));
-
-            // Enable annotations
-            options.EnableAnnotations();
         });
+
+        // Add Swagger Annotations package if you want to use EnableAnnotations
+        //services.AddSwaggerGenNewtonsoftSupport();
 
         return services;
     }

@@ -191,7 +191,7 @@ public class ContractsController : ControllerBase
         var result = await _mediator.Send(command);
         
         return result.Match<IActionResult>(
-            onSuccess: _ => NoContent(),
+            onSuccess: () => NoContent(),  // Исправлено: используем () вместо _
             onFailure: error => error.Code.Contains("NotFound")
                 ? NotFound(new ProblemDetails
                 {

@@ -3,11 +3,13 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using SmartTestTask.Application.DTOs.Responce;
 using SmartTestTask.Application.Queries;
+using SmartTestTask.Domain.Errors;
 using SmartTestTask.Domain.Interfaces;
+using SmartTestTask.Domain.Results;
 
 namespace SmartTestTask.Application.Handlers.Queries;
 
-public class GetContractByIdQueryHandler : IRequestHandler<GetContractByIdQuery, ApiResponse<ContractDto>>
+public class GetContractByIdQueryHandler : IRequestHandler<GetContractByIdQuery, Result<ContractDto>>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
@@ -23,7 +25,7 @@ public class GetContractByIdQueryHandler : IRequestHandler<GetContractByIdQuery,
         _logger = logger;
     }
 
-    public async Task<ApiResponse<ContractDto>> Handle(
+    public async Task<Result<ContractDto>> Handle(
         GetContractByIdQuery request, 
         CancellationToken cancellationToken)
     {
@@ -34,24 +36,22 @@ public class GetContractByIdQueryHandler : IRequestHandler<GetContractByIdQuery,
             
             if (contract == null)
             {
-                return ApiResponse<ContractDto>.FailureResponse(
-                    $"Contract with ID '{request.Id}' not found");
+                return DomainErrors.Contract.NotFound(request.Id);
             }
             
             var contractDto = _mapper.Map<ContractDto>(contract);
             
-            return ApiResponse<ContractDto>.SuccessResponse(contractDto);
+            return Result.Success(contractDto);
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error retrieving contract {ContractId}", request.Id);
-            return ApiResponse<ContractDto>.FailureResponse(
-                "An error occurred while retrieving the contract");
+            return DomainErrors.General.UnexpectedError;
         }
     }
 }
 
-public class GetContractsByFacilityQueryHandler : IRequestHandler<GetContractsByFacilityQuery, ApiResponse<IEnumerable<ContractDto>>>
+public class GetContractsByFacilityQueryHandler : IRequestHandler<GetContractsByFacilityQuery, Result<IEnumerable<ContractDto>>>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
@@ -67,7 +67,7 @@ public class GetContractsByFacilityQueryHandler : IRequestHandler<GetContractsBy
         _logger = logger;
     }
 
-    public async Task<ApiResponse<IEnumerable<ContractDto>>> Handle(
+    public async Task<Result<IEnumerable<ContractDto>>> Handle(
         GetContractsByFacilityQuery request, 
         CancellationToken cancellationToken)
     {
@@ -81,13 +81,12 @@ public class GetContractsByFacilityQueryHandler : IRequestHandler<GetContractsBy
             _logger.LogInformation("Retrieved {Count} contracts for facility {FacilityCode}", 
                 contracts.Count(), request.FacilityCode);
             
-            return ApiResponse<IEnumerable<ContractDto>>.SuccessResponse(contractDtos);
+            return Result.Success(contractDtos);
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error retrieving contracts for facility {FacilityCode}", request.FacilityCode);
-            return ApiResponse<IEnumerable<ContractDto>>.FailureResponse(
-                "An error occurred while retrieving contracts");
+            return DomainErrors.General.UnexpectedError;
         }
     }
 }
