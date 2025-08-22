@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  
+  <!-- Contract Success Messages -->
+  <data name="Contract_CreatedSuccessfully" xml:space="preserve">
+    <value>Contract created successfully</value>
+  </data>
+  <data name="Contract_UpdatedSuccessfully" xml:space="preserve">
+    <value>Contract updated successfully</value>
+  </data>
+  <data name="Contract_DeactivatedSuccessfully" xml:space="preserve">
+    <value>Contract deactivated successfully</value>
+  </data>
+  <data name="Contract_RetrievedSuccessfully" xml:space="preserve">
+    <value>Contract retrieved successfully</value>
+  </data>
+  <data name="Contracts_RetrievedSuccessfully" xml:space="preserve">
+    <value>Contracts retrieved successfully</value>
+  </data>
+  
+  <!-- Facility Success Messages -->
+  <data name="Facility_CreatedSuccessfully" xml:space="preserve">
+    <value>Facility created successfully</value>
+  </data>
+  <data name="Facility_UpdatedSuccessfully" xml:space="preserve">
+    <value>Facility updated successfully</value>
+  </data>
+  <data name="Facility_DeletedSuccessfully" xml:space="preserve">
+    <value>Facility deleted successfully</value>
+  </data>
+  <data name="Facilities_RetrievedSuccessfully" xml:space="preserve">
+    <value>Facilities retrieved successfully</value>
+  </data>
+  
+  <!-- Equipment Success Messages -->
+  <data name="Equipment_CreatedSuccessfully" xml:space="preserve">
+    <value>Equipment type created successfully</value>
+  </data>
+  <data name="Equipment_UpdatedSuccessfully" xml:space="preserve">
+    <value>Equipment type updated successfully</value>
+  </data>
+  <data name="Equipment_DeletedSuccessfully" xml:space="preserve">
+    <value>Equipment type deleted successfully</value>
+  </data>
+  <data name="EquipmentTypes_RetrievedSuccessfully" xml:space="preserve">
+    <value>Equipment types retrieved successfully</value>
+  </data>
+  
+  <!-- Processing Success Messages -->
+  <data name="Processing_ContractCreatedEventProcessed" xml:space="preserve">
+    <value>Contract created event processed successfully for Contract ID: {0}</value>
+  </data>
+  <data name="Processing_ContractUpdatedEventProcessed" xml:space="preserve">
+    <value>Contract updated event processed successfully for Contract ID: {0}</value>
+  </data>
+  <data name="Processing_ContractDeactivatedEventProcessed" xml:space="preserve">
+    <value>Contract deactivated event processed successfully for Contract ID: {0}</value>
+  </data>
+  
+  <!-- General Success Messages -->
+  <data name="General_OperationSuccessful" xml:space="preserve">
+    <value>Operation completed successfully</value>
+  </data>
+  <data name="General_DataSaved" xml:space="preserve">
+    <value>Data saved successfully</value>
+  </data>
+  <data name="General_ChangesApplied" xml:space="preserve">
+    <value>Changes applied successfully</value>
+  </data>
+</root>

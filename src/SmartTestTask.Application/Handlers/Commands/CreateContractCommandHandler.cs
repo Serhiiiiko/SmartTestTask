@@ -6,12 +6,13 @@ using SmartTestTask.Application.DTOs.Responce;
 using SmartTestTask.Application.Interfaces;
 using SmartTestTask.Application.Types;
 using SmartTestTask.Domain.Entities;
-using SmartTestTask.Domain.Exceptions;
+using SmartTestTask.Domain.Errors;
 using SmartTestTask.Domain.Interfaces;
+using SmartTestTask.Domain.Results;
 
 namespace SmartTestTask.Application.Handlers.Commands;
 
-public class CreateContractCommandHandler : IRequestHandler<CreateContractCommand, ApiResponse<ContractDto>>
+public class CreateContractCommandHandler : IRequestHandler<CreateContractCommand, Result<ContractDto>>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
@@ -30,7 +31,7 @@ public class CreateContractCommandHandler : IRequestHandler<CreateContractComman
         _logger = logger;
     }
 
-    public async Task<ApiResponse<ContractDto>> Handle(CreateContractCommand request, CancellationToken cancellationToken)
+    public async Task<Result<ContractDto>> Handle(CreateContractCommand request, CancellationToken cancellationToken)
     {
         try
         {
@@ -40,8 +41,7 @@ public class CreateContractCommandHandler : IRequestHandler<CreateContractComman
             
             if (facility == null)
             {
-                return ApiResponse<ContractDto>.FailureResponse(
-                    $"Production facility with code '{request.ProductionFacilityCode}' not found");
+                return DomainErrors.Facility.NotFound(request.ProductionFacilityCode);
             }
 
             // Get equipment type
@@ -50,8 +50,7 @@ public class CreateContractCommandHandler : IRequestHandler<CreateContractComman
             
             if (equipmentType == null)
             {
-                return ApiResponse<ContractDto>.FailureResponse(
-                    $"Process equipment type with code '{request.ProcessEquipmentTypeCode}' not found");
+                return DomainErrors.Equipment.NotFound(request.ProcessEquipmentTypeCode);
             }
 
             // Validate available area
@@ -60,7 +59,7 @@ public class CreateContractCommandHandler : IRequestHandler<CreateContractComman
                 var requiredArea = equipmentType.Area * request.EquipmentQuantity;
                 var availableArea = facility.GetAvailableArea();
                 
-                throw new InsufficientAreaException(
+                return DomainErrors.Facility.InsufficientArea(
                     facility.Code, 
                     requiredArea, 
                     availableArea);
@@ -93,17 +92,12 @@ public class CreateContractCommandHandler : IRequestHandler<CreateContractComman
 
             _logger.LogInformation("Contract {ContractId} created successfully", contract.Id);
 
-            return ApiResponse<ContractDto>.SuccessResponse(contractDto, "Contract created successfully");
-        }
-        catch (InsufficientAreaException ex)
-        {
-            _logger.LogWarning(ex, "Insufficient area for contract creation");
-            return ApiResponse<ContractDto>.FailureResponse(ex.Message);
+            return Result.Success(contractDto);
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error creating contract");
-            return ApiResponse<ContractDto>.FailureResponse("An error occurred while creating the contract");
+            return DomainErrors.General.UnexpectedError;
         }
     }
 }

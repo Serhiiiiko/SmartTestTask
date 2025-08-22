@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  
+  <!-- Field Validation Messages -->
+  <data name="Field_Required" xml:space="preserve">
+    <value>{0} is required</value>
+  </data>
+  <data name="Field_MaxLength" xml:space="preserve">
+    <value>{0} must not exceed {1} characters</value>
+  </data>
+  <data name="Field_MinLength" xml:space="preserve">
+    <value>{0} must be at least {1} characters</value>
+  </data>
+  <data name="Field_InvalidFormat" xml:space="preserve">
+    <value>{0} has invalid format</value>
+  </data>
+  <data name="Field_MustBePositive" xml:space="preserve">
+    <value>{0} must be greater than zero</value>
+  </data>
+  <data name="Field_MustBeInRange" xml:space="preserve">
+    <value>{0} must be between {1} and {2}</value>
+  </data>
+  
+  <!-- Contract Validation Messages -->
+  <data name="Contract_FacilityCodeRequired" xml:space="preserve">
+    <value>Production facility code is required</value>
+  </data>
+  <data name="Contract_FacilityCodeMaxLength" xml:space="preserve">
+    <value>Production facility code must not exceed 50 characters</value>
+  </data>
+  <data name="Contract_FacilityCodeFormat" xml:space="preserve">
+    <value>Production facility code must contain only uppercase letters, numbers, and hyphens</value>
+  </data>
+  <data name="Contract_EquipmentCodeRequired" xml:space="preserve">
+    <value>Process equipment type code is required</value>
+  </data>
+  <data name="Contract_EquipmentCodeMaxLength" xml:space="preserve">
+    <value>Process equipment type code must not exceed 50 characters</value>
+  </data>
+  <data name="Contract_EquipmentCodeFormat" xml:space="preserve">
+    <value>Process equipment type code must contain only uppercase letters, numbers, and hyphens</value>
+  </data>
+  <data name="Contract_QuantityRequired" xml:space="preserve">
+    <value>Equipment quantity is required</value>
+  </data>
+  <data name="Contract_QuantityMustBePositive" xml:space="preserve">
+    <value>Equipment quantity must be greater than zero</value>
+  </data>
+  <data name="Contract_QuantityMaximum" xml:space="preserve">
+    <value>Equipment quantity must not exceed 1000</value>
+  </data>
+  <data name="Contract_IdRequired" xml:space="preserve">
+    <value>Contract ID is required</value>
+  </data>
+  
+  <!-- Facility Validation Messages -->
+  <data name="Facility_CodeRequired" xml:space="preserve">
+    <value>Facility code is required</value>
+  </data>
+  <data name="Facility_NameRequired" xml:space="preserve">
+    <value>Facility name is required</value>
+  </data>
+  <data name="Facility_AreaMustBePositive" xml:space="preserve">
+    <value>Facility area must be greater than zero</value>
+  </data>
+  
+  <!-- Equipment Validation Messages -->
+  <data name="Equipment_CodeRequired" xml:space="preserve">
+    <value>Equipment type code is required</value>
+  </data>
+  <data name="Equipment_NameRequired" xml:space="preserve">
+    <value>Equipment type name is required</value>
+  </data>
+  <data name="Equipment_AreaMustBePositive" xml:space="preserve">
+    <value>Equipment area must be greater than zero</value>
+  </data>
+</root>

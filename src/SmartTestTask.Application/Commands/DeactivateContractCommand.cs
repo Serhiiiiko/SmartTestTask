@@ -1,14 +1,6 @@
 ﻿using MediatR;
-using SmartTestTask.Application.DTOs.Responce;
+using SmartTestTask.Domain.Results;
 
 namespace SmartTestTask.Application.Commands;
 
-public class DeactivateContractCommand : IRequest<ApiResponse<bool>>
-{
-    public Guid Id { get; set; }
-    
-    public DeactivateContractCommand(Guid id)
-    {
-        Id = id;
-    }
-}
+public record DeactivateContractCommand(Guid Id) : IRequest<Result>;

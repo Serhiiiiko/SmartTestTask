@@ -31,13 +31,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\src\SmartTestTask.Application\SmartTestTask.Application.csproj" />
       <ProjectReference Include="..\SmartTestTask.Application\SmartTestTask.Application.csproj" />
       <ProjectReference Include="..\SmartTestTask.Infrastructure\SmartTestTask.Infrastructure.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Extensions\" />
       <Folder Include="Filters\" />
     </ItemGroup>
 

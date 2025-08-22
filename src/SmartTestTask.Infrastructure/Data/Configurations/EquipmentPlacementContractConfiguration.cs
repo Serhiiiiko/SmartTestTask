@@ -4,68 +4,6 @@ using SmartTestTask.Domain.Entities;
 
 namespace SmartTestTask.Infrastructure.Data.Configurations;
 
-public class ProductionFacilityConfiguration : IEntityTypeConfiguration<ProductionFacility>
-{
-    public void Configure(EntityTypeBuilder<ProductionFacility> builder)
-    {
-        builder.ToTable("ProductionFacilities");
-        
-        builder.HasKey(e => e.Code);
-        
-        builder.Property(e => e.Code)
-            .HasMaxLength(50)
-            .IsRequired();
-        
-        builder.Property(e => e.Name)
-            .HasMaxLength(200)
-            .IsRequired();
-        
-        builder.Property(e => e.StandardArea)
-            .HasColumnType("decimal(18,2)")
-            .IsRequired();
-        
-        // Relationships
-        builder.HasMany(e => e.Contracts)
-            .WithOne(e => e.ProductionFacility)
-            .HasForeignKey(e => e.ProductionFacilityCode)
-            .OnDelete(DeleteBehavior.Restrict);
-        
-        // Indexes
-        builder.HasIndex(e => e.Name);
-    }
-}
-
-public class ProcessEquipmentTypeConfiguration : IEntityTypeConfiguration<ProcessEquipmentType>
-{
-    public void Configure(EntityTypeBuilder<ProcessEquipmentType> builder)
-    {
-        builder.ToTable("ProcessEquipmentTypes");
-        
-        builder.HasKey(e => e.Code);
-        
-        builder.Property(e => e.Code)
-            .HasMaxLength(50)
-            .IsRequired();
-        
-        builder.Property(e => e.Name)
-            .HasMaxLength(200)
-            .IsRequired();
-        
-        builder.Property(e => e.Area)
-            .HasColumnType("decimal(18,2)")
-            .IsRequired();
-        
-        // Relationships
-        builder.HasMany(e => e.Contracts)
-            .WithOne(e => e.ProcessEquipmentType)
-            .HasForeignKey(e => e.ProcessEquipmentTypeCode)
-            .OnDelete(DeleteBehavior.Restrict);
-        
-        // Indexes
-        builder.HasIndex(e => e.Name);
-    }
-}
-
 public class EquipmentPlacementContractConfiguration : IEntityTypeConfiguration<EquipmentPlacementContract>
 {
     public void Configure(EntityTypeBuilder<EquipmentPlacementContract> builder)

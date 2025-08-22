@@ -1,18 +1,10 @@
 ﻿using MediatR;
 using SmartTestTask.Application.DTOs.Responce;
+using SmartTestTask.Domain.Results;
 
 namespace SmartTestTask.Application.Commands;
 
-public class CreateContractCommand : IRequest<ApiResponse<ContractDto>>
-{
-    public string ProductionFacilityCode { get; set; }
-    public string ProcessEquipmentTypeCode { get; set; }
-    public int EquipmentQuantity { get; set; }
-    
-    public CreateContractCommand(string productionFacilityCode, string processEquipmentTypeCode, int equipmentQuantity)
-    {
-        ProductionFacilityCode = productionFacilityCode;
-        ProcessEquipmentTypeCode = processEquipmentTypeCode;
-        EquipmentQuantity = equipmentQuantity;
-    }
-}
+public record CreateContractCommand(
+    string ProductionFacilityCode,
+    string ProcessEquipmentTypeCode,
+    int EquipmentQuantity) : IRequest<Result<ContractDto>>;

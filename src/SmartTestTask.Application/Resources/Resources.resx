@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+  
+    <!-- Contract Errors -->
+    <data name="Contract_NotFound" xml:space="preserve">
+    <value>Contract with ID '{0}' was not found</value>
+  </data>
+    <data name="Contract_InvalidQuantity" xml:space="preserve">
+    <value>Equipment quantity must be greater than zero</value>
+  </data>
+    <data name="Contract_AlreadyDeactivated" xml:space="preserve">
+    <value>Contract is already deactivated</value>
+  </data>
+    <data name="Contract_CreationFailed" xml:space="preserve">
+    <value>Failed to create contract</value>
+  </data>
+    <data name="Contract_UpdateFailed" xml:space="preserve">
+    <value>Failed to update contract</value>
+  </data>
+    <data name="Contract_DeactivationFailed" xml:space="preserve">
+    <value>Failed to deactivate contract</value>
+  </data>
+    <data name="Contract_IdMismatch" xml:space="preserve">
+    <value>Contract ID mismatch</value>
+  </data>
+  
+    <!-- Facility Errors -->
+    <data name="Facility_NotFound" xml:space="preserve">
+    <value>Production facility with code '{0}' was not found</value>
+  </data>
+    <data name="Facility_InsufficientArea" xml:space="preserve">
+    <value>Insufficient area in facility {0}. Required: {1} m², Available: {2} m²</value>
+  </data>
+  
+    <!-- Equipment Errors -->
+    <data name="Equipment_NotFound" xml:space="preserve">
+    <value>Process equipment type with code '{0}' was not found</value>
+  </data>
+  
+    <!-- General Errors -->
+    <data name="General_UnexpectedError" xml:space="preserve">
+    <value>An unexpected error occurred</value>
+  </data>
+  
+    <!-- API Errors -->
+    <data name="Api_InvalidApiKey" xml:space="preserve">
+    <value>Invalid API Key</value>
+  </data>
+    <data name="Api_ApiKeyNotProvided" xml:space="preserve">
+    <value>API Key was not provided</value>
+  </data>
+</root>
