@@ -31,14 +31,16 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\SmartTestTask.API\SmartTestTask.API.csproj" />
-      <ProjectReference Include="..\SmartTestTask.Infrastructure\SmartTestTask.Infrastructure.csproj" />
-      <ProjectReference Include="..\src\SmartTestTask.Application\SmartTestTask.Application.csproj" />
-      <ProjectReference Include="..\src\SmartTestTask.Domain\SmartTestTask.Domain.csproj" />
-      <ProjectReference Include="..\..\src\SmartTestTask.Domain\SmartTestTask.Domain.csproj" />
-      <ProjectReference Include="..\..\src\SmartTestTask.Application\SmartTestTask.Application.csproj" />
-      <ProjectReference Include="..\..\src\SmartTestTask.Infrastructure\SmartTestTask.Infrastructure.csproj" />
       <ProjectReference Include="..\..\src\SmartTestTask.API\SmartTestTask.API.csproj" />
+      <ProjectReference Include="..\..\src\SmartTestTask.Application\SmartTestTask.Application.csproj" />
+      <ProjectReference Include="..\..\src\SmartTestTask.Domain\SmartTestTask.Domain.csproj" />
+      <ProjectReference Include="..\..\src\SmartTestTask.Infrastructure\SmartTestTask.Infrastructure.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Controllers\" />
+      <Folder Include="Domain\" />
+      <Folder Include="Repositories\" />
+    </ItemGroup>
+    
 </Project>

@@ -1,23 +1,44 @@
-﻿FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-USER $APP_UID
-WORKDIR /app
-EXPOSE 8080
-EXPOSE 8081
-
+﻿# Build stage
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["SmartTestTask.API/SmartTestTask.API.csproj", "SmartTestTask.API/"]
-RUN dotnet restore "SmartTestTask.API/SmartTestTask.API.csproj"
+
+# Copy solution and project files
+COPY ["SmartTestTask.sln", "./"]
+COPY ["src/SmartTestTask.API/SmartTestTask.API.csproj", "src/SmartTestTask.API/"]
+COPY ["src/SmartTestTask.Application/SmartTestTask.Application.csproj", "src/SmartTestTask.Application/"]
+COPY ["src/SmartTestTask.Domain/SmartTestTask.Domain.csproj", "src/SmartTestTask.Domain/"]
+COPY ["src/SmartTestTask.Infrastructure/SmartTestTask.Infrastructure.csproj", "src/SmartTestTask.Infrastructure/"]
+
+# Restore dependencies
+RUN dotnet restore "src/SmartTestTask.API/SmartTestTask.API.csproj"
+
+# Copy everything else
 COPY . .
-WORKDIR "/src/SmartTestTask.API"
-RUN dotnet build "./SmartTestTask.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
+# Build the application
+WORKDIR "/src/src/SmartTestTask.API"
+RUN dotnet build "SmartTestTask.API.csproj" -c Release -o /app/build
+
+# Publish stage
 FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./SmartTestTask.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "SmartTestTask.API.csproj" -c Release -o /app/publish
 
-FROM base AS final
+# Runtime stage
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
+EXPOSE 80
+EXPOSE 443
+
+# Install EF Core tools for migrations
+RUN dotnet tool install --global dotnet-ef
+ENV PATH="${PATH}:/root/.dotnet/tools"
+
+# Copy published files
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "SmartTestTask.API.dll"]
+
+# Create entrypoint script for migrations
+RUN echo '#!/bin/bash\n\
+dotnet SmartTestTask.API.dll' > /app/entrypoint.sh && \
+chmod +x /app/entrypoint.sh
+
+ENTRYPOINT ["/app/entrypoint.sh"]
