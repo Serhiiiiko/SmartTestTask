@@ -1,0 +1,69 @@
+﻿name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version (e.g., v1.0.0)'
+        required: true
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Build Release
+      run: |
+        dotnet build SmartTestTask.sln --configuration Release
+        dotnet publish src/SmartTestTask.API/SmartTestTask.API.csproj \
+          --configuration Release \
+          --output ./release/api \
+          --self-contained false \
+          --runtime win-x64
+        dotnet publish src/SmartTestTask.API/SmartTestTask.API.csproj \
+          --configuration Release \
+          --output ./release/api-linux \
+          --self-contained false \
+          --runtime linux-x64
+
+    - name: Create Release Archives
+      run: |
+        cd release
+        tar -czf smarttesttask-api-win-x64.tar.gz api/
+        tar -czf smarttesttask-api-linux-x64.tar.gz api-linux/
+        cd ..
+
+    - name: Generate Release Notes
+      id: release_notes
+      run: |
+        echo "## What's Changed" > release_notes.md
+        git log --pretty=format:"* %s by @%an" $(git describe --tags --abbrev=0 HEAD^)..HEAD >> release_notes.md
+        echo "" >> release_notes.md
+        echo "## Full Changelog" >> release_notes.md
+        echo "https://github.com/${{ github.repository }}/compare/$(git describe --tags --abbrev=0 HEAD^)...${{ github.ref_name }}" >> release_notes.md
+
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ github.ref_name }}
+        name: Release ${{ github.ref_name }}
+        body_path: release_notes.md
+        draft: false
+        prerelease: false
+        files: |
+          release/*.tar.gz
