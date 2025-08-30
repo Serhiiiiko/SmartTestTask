@@ -29,16 +29,7 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-# Install EF Core tools for migrations
-RUN dotnet tool install --global dotnet-ef
-ENV PATH="${PATH}:/root/.dotnet/tools"
-
 # Copy published files
 COPY --from=publish /app/publish .
 
-# Create entrypoint script for migrations
-RUN echo '#!/bin/bash\n\
-dotnet SmartTestTask.API.dll' > /app/entrypoint.sh && \
-chmod +x /app/entrypoint.sh
-
-ENTRYPOINT ["/app/entrypoint.sh"]
+ENTRYPOINT ["dotnet", "SmartTestTask.API.dll"]

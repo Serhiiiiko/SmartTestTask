@@ -1,0 +1,54 @@
+﻿version: '3.8'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: smarttesttask-sqlserver
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=YourStrong!Passw0rd123
+      - MSSQL_PID=Developer
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+    networks:
+      - smarttesttask-network
+    healthcheck:
+      test: ["CMD", "/opt/mssql-tools/bin/sqlcmd", "-S", "localhost", "-U", "sa", "-P", "YourStrong!Passw0rd123", "-Q", "SELECT 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  smarttesttask.api:
+    build:
+      context: .
+      dockerfile: src/SmartTestTask.API/Dockerfile
+    container_name: smarttesttask-api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=SmartTestTaskDb_Dev;User Id=sa;Password=YourStrong!Passw0rd123;TrustServerCertificate=True;MultipleActiveResultSets=true
+      - ApiKey=DEV_API_KEY_12345
+      - ServiceBus__Enabled=false
+    ports:
+      - "5120:80"
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+    networks:
+      - smarttesttask-network
+
+  adminer:
+    image: adminer
+    container_name: smarttesttask-adminer
+    ports:
+      - "8080:8080"
+    networks:
+      - smarttesttask-network
+
+volumes:
+  sqlserver-data:
+
+networks:
+  smarttesttask-network:
